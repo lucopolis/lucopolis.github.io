@@ -1,0 +1,86 @@
+/* Monthly course banner — injected between the hero and "Para quem" sections.
+   Edit colors here only if you want to change how the banner LOOKS.
+   Edit the actual text/link in /content/monthly-course.json instead. */
+
+.bc-monthly-banner {
+  position: relative;
+  margin: 0 auto;
+  padding: 1.75rem clamp(1.25rem, 4vw, 3rem);
+  max-width: 72rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  border-radius: hsl(var(--radius, 1.25rem)) var(--bc-radius, 1.25rem);
+  border-radius: var(--radius, 1.25rem);
+  background: linear-gradient(135deg, hsl(var(--coral, 352 79% 63%)), hsl(var(--coral-deep, 352 60% 46%)));
+  box-shadow: var(--shadow-bloom, 0 10px 40px -10px hsl(352 79% 50% / 0.2));
+  color: hsl(var(--coral-foreground, 36 33% 97%));
+  font-family: Outfit, system-ui, sans-serif;
+}
+
+.bc-monthly-banner__text {
+  flex: 1 1 20rem;
+  min-width: 0;
+}
+
+.bc-monthly-banner__eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 0.35rem;
+}
+
+.bc-monthly-banner__title {
+  font-family: Lora, Georgia, serif;
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  line-height: 1.3;
+  margin: 0 0 0.35rem 0;
+}
+
+.bc-monthly-banner__desc {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0.95;
+}
+
+.bc-monthly-banner__note {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-top: 0.35rem;
+}
+
+.bc-monthly-banner__cta {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.5rem;
+  border-radius: 999px;
+  background: hsl(var(--background, 36 33% 97%));
+  color: hsl(var(--coral-deep, 352 60% 46%));
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.2s var(--ease-soft, cubic-bezier(0.22, 1, 0.36, 1)), box-shadow 0.2s;
+}
+
+.bc-monthly-banner__cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -6px hsl(224 30% 30% / 0.25);
+}
+
+@media (max-width: 640px) {
+  .bc-monthly-banner {
+    padding: 1.5rem 1.25rem;
+  }
+  .bc-monthly-banner__cta {
+    width: 100%;
+  }
+}
