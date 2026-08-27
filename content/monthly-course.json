@@ -4,6 +4,7 @@
   "title": "Nome da turma / curso",
   "description": "Escreva aqui uma frase curta sobre a turma que está com inscrições abertas neste mês.",
   "ctaText": "Quero saber mais",
-  "ctaLink": "https://forms.gle/SUBSTITUA-PELO-LINK",
-  "note": "Vagas limitadas"
+  "ctaLink": "/cursos/novo-curso/",
+  "note": "Vagas limitadas",
+  "slug": "novo-curso"
 }
