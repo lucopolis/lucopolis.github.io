@@ -1,18 +1,21 @@
 /* Shared styling for individual course/turma landing pages under /cursos/<slug>/.
-   Matches the main site's palette and type (coral/ink, Kapra Neue + Poynter OS Text).
+   Matches the main site's palette and type (Kapra Neue + Poynter OS Text,
+   purple #835aa4 / teal #17bbb9 / dark blue #1d3657).
    Edit this file to restyle ALL course pages at once. */
 
 :root {
-  --background: 36 33% 97%;
-  --ink: 224 26% 41%;
-  --ink-deep: 222 26% 28%;
-  --coral: 352 79% 63%;
-  --coral-deep: 352 60% 46%;
-  --coral-soft: 352 70% 95%;
-  --border: 224 20% 88%;
+  --purple: #835aa4;
+  --teal: #17bbb9;
+  --teal-deep: #14a3a1;
+  --dark-blue: #1d3657;
+  --hero-cream: #f0e8dc;
+  --page-bg: #fbf9f6;
+  --ink: hsl(224 26% 41%);
+  --ink-deep: hsl(222 26% 28%);
+  --border: hsl(224 20% 88%);
   --radius: 1.25rem;
   --shadow-soft: 0 30px 60px -30px hsl(224 30% 30% / 0.18);
-  --shadow-bloom: 0 10px 40px -10px hsl(352 79% 50% / 0.2);
+  --shadow-bloom: 0 10px 40px -10px rgba(0, 0, 0, 0.18);
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -22,135 +25,402 @@
 
 body {
   margin: 0;
-  background: hsl(var(--background));
-  color: hsl(var(--ink-deep));
+  background: var(--page-bg);
+  color: var(--ink-deep);
   font-family: "Poynter OS Text", Georgia, serif;
   line-height: 1.6;
 }
 
+img {
+  max-width: 100%;
+}
+
+/* ============================================================
+   Nav — matches the main site's header (round 4: flat #F7F7F7 bg,
+   be-horizontal.svg logo with the wordmark baked in, no separate
+   text label).
+   ============================================================ */
+
+.cl-nav {
+  background: #f7f7f7;
+}
+
+.cl-nav-inner {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1.5rem clamp(1.25rem, 4vw, 2.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.cl-nav-logo img {
+  height: 2.75rem;
+  width: auto;
+  display: block;
+}
+
+.cl-nav-links {
+  display: none;
+  align-items: center;
+  gap: 2.5rem;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.cl-nav-links a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.cl-nav-links a:hover {
+  color: var(--ink-deep);
+}
+
+@media (min-width: 1024px) {
+  .cl-nav-links {
+    display: flex;
+  }
+}
+
+/* On the homepage, the language switcher and the CTA button are
+   grouped together in their own small flex container (gap-4 = 1rem)
+   — that group is what sits at the far right of the nav, not the
+   switcher on its own. Reproduced here so the switcher sits right next
+   to the CTA instead of getting spread out by the nav's own
+   space-between + gap. */
+.cl-nav-trailing {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Matches the homepage's own language switcher pill exactly (same
+   markup/classes/colors as the React component: a rounded translucent
+   pill holding two flag icon buttons, the active one ringed + scaled
+   up, the inactive one dimmed). Reimplemented here in plain CSS since
+   these course pages are static HTML, not the React app. */
+.cl-lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem;
+  border-radius: 999px;
+  background: hsla(36, 33%, 97%, 0.8);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid hsla(224, 20%, 88%, 0.7);
+}
+
+.cl-lang-switch a {
+  display: flex;
+  padding: 0.25rem;
+  border-radius: 999px;
+  opacity: 0.5;
+  transition: all 0.2s;
+}
+
+.cl-lang-switch a:hover {
+  opacity: 1;
+}
+
+.cl-lang-switch a.is-active {
+  opacity: 1;
+  transform: scale(1.05);
+  box-shadow: 0 0 0 2px hsla(222, 26%, 28%, 0.8);
+}
+
+.cl-lang-switch svg {
+  display: block;
+  width: 1.5rem;
+  height: 1.125rem;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.cl-nav-cta {
+  display: none;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+  background: var(--teal);
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.cl-nav-cta:hover {
+  background: var(--teal-deep);
+}
+
+@media (min-width: 640px) {
+  .cl-nav-cta {
+    display: inline-flex;
+  }
+}
+
+/* ============================================================
+   Hero — background image (responsive: scales down below its
+   native 1440px width, and on wider screens stays at native size,
+   centered, with the hero-cream color filling the sides so it
+   never crops or stretches). The copy + CTA float centered on top.
+   ============================================================ */
+
+.cl-hero {
+  position: relative;
+  background-color: var(--hero-cream);
+  background-image: url("/assets/cursos/novo-curso/hero-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: min(1440px, 100%) auto;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+}
+
+@media (max-width: 767px) {
+  .cl-hero {
+    background-size: cover;
+    background-position: center;
+    min-height: 260px;
+    padding: 2.25rem 1.25rem;
+  }
+}
+
+.cl-hero-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 3.5rem 5rem;
+  max-width: 56rem;
+  text-align: left;
+}
+
+@media (max-width: 640px) {
+  .cl-hero-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 2.5rem;
+  }
+}
+
+.cl-hero-copy {
+  margin: 0;
+}
+
+.cl-hero-eyebrow-text,
+.cl-hero-note {
+  display: block;
+  font-family: "Poynter OS Text", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+  color: var(--dark-blue);
+  line-height: 1.3;
+}
+
+/* English hero copy is longer than the Portuguese original ("Training
+   Program in" / "limited spots!" vs. "Formação em" / "vagas
+   limitadas!"), so it's sized down independently: both -20% from the
+   Portuguese hero's size. Scoped to :lang(en) (set via <html
+   lang="en">) so the Portuguese page's sizing is untouched. */
+:lang(en) .cl-hero-eyebrow-text {
+  font-size: clamp(0.88rem, 2.08vw, 1.2rem);
+}
+
+:lang(en) .cl-hero-note {
+  font-size: clamp(0.88rem, 2.08vw, 1.2rem);
+}
+
+.cl-hero-title {
+  font-family: "Kapra Neue", system-ui, sans-serif;
+  text-transform: uppercase;
+  font-style: normal;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  line-height: 0.95;
+  color: var(--purple);
+  margin: 0.1rem 0;
+}
+
+.cl-hero-cta {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.25rem;
+  border-radius: 999px;
+  background: var(--teal);
+  color: #fff;
+  font-family: "Poynter OS Text", Georgia, serif;
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  box-shadow: var(--shadow-bloom);
+  transition: transform 0.2s var(--ease-soft), background 0.2s;
+}
+
+.cl-hero-cta:hover {
+  transform: translateY(-2px);
+  background: var(--teal-deep);
+}
+
+/* ============================================================
+   Shared section container + headings
+   ============================================================ */
+
 .cl-container {
-  max-width: 42rem;
+  max-width: 48rem;
   margin: 0 auto;
   padding: 0 clamp(1.25rem, 4vw, 2rem);
 }
 
-.cl-header {
-  padding: 1.5rem 0;
-}
-
-.cl-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: hsl(var(--ink));
-  text-decoration: none;
-}
-
-.cl-back:hover {
-  color: hsl(var(--coral-deep));
-}
-
-.cl-hero {
-  padding: 2rem 0 1.5rem;
-}
-
-.cl-eyebrow {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #17bbb9;
-  background: hsl(var(--coral-soft));
-  padding: 0.35rem 0.9rem;
-  border-radius: 999px;
-  margin-bottom: 1rem;
-}
-
-.cl-title {
-  font-family: "Kapra Neue", system-ui, sans-serif;
-  text-transform: uppercase;
-  font-style: normal;
-  font-size: clamp(1.75rem, 5vw, 2.75rem);
-  line-height: 1.2;
-  margin: 0 0 1rem 0;
-  color: #835aa4;
-}
-
-.cl-pitch {
-  font-size: 1.1rem;
-  color: hsl(var(--ink));
-  margin: 0;
-}
-
 .cl-section {
-  padding: 1.5rem 0;
+  padding: 2.5rem 0;
 }
 
 .cl-body p {
+  margin: 0 0 1.1rem 0;
   font-size: 1rem;
-  color: hsl(var(--ink-deep));
+  color: var(--ink-deep);
 }
 
-.cl-highlights {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.cl-body p:last-child {
+  margin-bottom: 0;
+}
+
+.cl-heading {
+  font-family: "Kapra Neue", system-ui, sans-serif;
+  text-transform: uppercase;
+  font-style: normal;
+  font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+  color: var(--purple);
+  margin: 0 0 0.5rem 0;
+}
+
+/* ============================================================
+   Info band — full-bleed teal strip with 4 dark-blue boxes
+   ============================================================ */
+
+.cl-info-band {
+  background: var(--teal);
+  padding: 3rem 0;
+  margin: 1rem 0;
+}
+
+.cl-info-band .cl-heading {
+  color: var(--dark-blue);
+  text-align: center;
+  max-width: 48rem;
+  margin: 0 auto 1rem;
+  padding: 0 clamp(1.25rem, 4vw, 2rem);
+}
+
+.cl-info-grid {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 2rem);
   display: grid;
-  gap: 0.9rem;
-}
-
-.cl-highlights li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  font-size: 1rem;
-}
-
-.cl-highlights li::before {
-  content: "";
-  flex: 0 0 auto;
-  width: 1.5rem;
-  height: 1.5rem;
-  margin-top: 0.1rem;
-  border-radius: 999px;
-  background: hsl(var(--coral-soft));
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23c23b5a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 10l4 4 8-8'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 0.8rem;
-}
-
-.cl-info-panel {
-  background: hsl(0 0% 100%);
-  border: 1px solid hsl(var(--border));
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  display: grid;
-  gap: 0.9rem;
-}
-
-.cl-info-row {
-  display: flex;
-  justify-content: space-between;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-  font-size: 0.95rem;
+}
+
+@media (min-width: 768px) {
+  .cl-info-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.cl-info-box {
+  background: var(--dark-blue);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.25rem;
+  text-align: center;
 }
 
 .cl-info-label {
-  color: hsl(var(--ink));
-  font-weight: 600;
+  display: block;
+  color: var(--teal);
+  font-size: 0.95rem;
+  margin-bottom: 0.175rem;
 }
 
 .cl-info-value {
-  color: hsl(var(--ink-deep));
-  text-align: right;
+  display: block;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.3;
 }
 
+/* ============================================================
+   Local / Datas / Investimento / Confirmação / Dúvidas — plain
+   text sections using the shared .cl-heading + .cl-body styles.
+   ============================================================ */
+
+.cl-address p {
+  margin: 0;
+  color: var(--ink-deep);
+}
+
+.cl-dates-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 480px) {
+  .cl-dates-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.cl-dates-grid li {
+  color: var(--ink-deep);
+  padding: 0.3rem 0;
+}
+
+.cl-invest p,
+.cl-confirm p,
+.cl-duvidas p {
+  margin: 0 0 0.9rem 0;
+  color: var(--ink-deep);
+}
+
+.cl-invest p:last-child,
+.cl-confirm p:last-child,
+.cl-duvidas p:last-child {
+  margin-bottom: 0;
+}
+
+.cl-invest a {
+  color: var(--teal-deep);
+  word-break: break-word;
+}
+
+.cl-invest strong,
+.cl-duvidas strong {
+  color: var(--ink-deep);
+  font-weight: 700;
+}
+
+/* ============================================================
+   CTA section (mid-page, before Dúvidas)
+   ============================================================ */
+
 .cl-cta-section {
-  padding: 2rem 0 3rem;
+  padding: 1rem 0 3rem;
   text-align: center;
 }
 
@@ -160,36 +430,152 @@ body {
   justify-content: center;
   padding: 1rem 2.5rem;
   border-radius: 999px;
-  background: #17bbb9;
-  color: hsl(36 33% 97%);
+  background: var(--teal);
+  color: #fff;
   font-family: "Poynter OS Text", Georgia, serif;
   text-transform: uppercase;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.05rem;
   text-decoration: none;
   box-shadow: var(--shadow-bloom);
-  transition: transform 0.2s var(--ease-soft);
+  transition: transform 0.2s var(--ease-soft), background 0.2s;
 }
 
 .cl-cta:hover {
   transform: translateY(-2px);
+  background: var(--teal-deep);
 }
 
-.cl-cta-note {
-  margin-top: 0.9rem;
-  font-size: 0.85rem;
-  color: hsl(var(--ink));
-}
+/* ============================================================
+   Footer — matches the main site's footer (round 5/6: no tagline
+   under the logo, social icons centered in their own column,
+   "Contato direto" in black).
+   ============================================================ */
 
 .cl-footer {
-  padding: 2rem 0 3rem;
-  border-top: 1px solid hsl(var(--border));
-  text-align: center;
-  font-size: 0.85rem;
-  color: hsl(var(--ink));
+  border-top: 1px solid var(--border);
+  background: var(--page-bg);
+  margin-top: 2rem;
 }
 
-.cl-footer a {
-  color: hsl(var(--coral-deep));
+.cl-footer-inner {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 3rem clamp(1.25rem, 4vw, 2.5rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .cl-footer-inner {
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: left;
+  }
+}
+
+.cl-footer-logo img {
+  height: 5rem;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .cl-footer-logo img {
+    margin: 0;
+  }
+}
+
+.cl-footer-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.cl-footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--ink);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.cl-footer-social a:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.cl-footer-social svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.cl-footer-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .cl-footer-contact {
+    align-items: flex-end;
+  }
+}
+
+.cl-footer-contact-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.cl-footer-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--teal);
+  color: var(--teal);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.cl-footer-whatsapp:hover {
+  background: var(--teal);
+  color: #fff;
+}
+
+.cl-footer-bottom {
+  border-top: 1px solid var(--border);
+}
+
+.cl-footer-bottom-inner {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1.5rem clamp(1.25rem, 4vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--ink);
+}
+
+@media (min-width: 768px) {
+  .cl-footer-bottom-inner {
+    flex-direction: row;
+  }
 }
