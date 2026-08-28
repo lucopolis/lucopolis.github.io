@@ -1,0 +1,26 @@
+/* Be Center custom brand fonts.
+   Linked from every page (homepage + each /cursos/<slug>/ page) so the
+   font names below ("Kapra Neue" for headings, "Poynter OS Text" for body)
+   are available everywhere. Files live in assets/fonts/.
+   .woff is listed first (smaller, loads faster in modern browsers),
+   .otf is the fallback for anything that doesn't support .woff. */
+
+@font-face {
+  font-family: "Kapra Neue";
+  src:
+    url("fonts/kapra-neue-semibold-condensed.woff") format("woff"),
+    url("fonts/kapra-neue-semibold-condensed.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poynter OS Text";
+  src:
+    url("fonts/poynter-os-text-one-roman.woff") format("woff"),
+    url("fonts/poynter-os-text-one-roman.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
