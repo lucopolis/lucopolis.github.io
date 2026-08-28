@@ -24,23 +24,36 @@ The banner's look (colors, spacing, font) lives in `assets/monthly-feature.css`,
 and the logic that inserts it into the page lives in `assets/monthly-feature.js`.
 You shouldn't need to touch either of those for routine monthly updates.
 
-## Course landing pages (`/cursos/<slug>/`)
+## Course landing pages
 
-Every course/turma gets its own permanent page at `becenter.me/cursos/<slug>/`
-(e.g. `becenter.me/cursos/reiki-nivel-1/`). These pages stay live even after
-that course cycles out of the homepage banner, so links you've already shared
-(social bio, WhatsApp, ads, etc.) never break — you can just reuse the same
-page again next time that course reopens.
+Every course/turma gets its own permanent page. These pages stay live even
+after that course cycles out of the homepage banner, so links you've already
+shared (social bio, WhatsApp, ads, etc.) never break — you can just reuse
+the same page again next time that course reopens.
+
+Two URL patterns are in use:
+
+- **Default:** `becenter.me/cursos/<slug>/` (e.g.
+  `becenter.me/cursos/reiki-nivel-1/`) — the simplest option, just copy a
+  folder under `cursos/`.
+- **Custom top-level slug:** `becenter.me/<slug>/` (e.g. `becenter.me/apometria/`,
+  the live example) — used when you want a cleaner, shorter URL for a
+  flagship course. Same page, just placed at the repo root instead of under
+  `cursos/`.
 
 To add a new course page:
 
-1. Copy the `cursos/novo-curso/` folder to a new folder named after the
-   course (a short, URL-safe slug, e.g. `cursos/reiki-nivel-1/`).
+1. Copy the `apometria/` folder (or any existing course folder) to a new
+   folder named after the course — either under `cursos/<slug>/` for the
+   default pattern, or as a new top-level `<slug>/` folder for a custom
+   short URL.
 2. Edit `index.html` inside it — fill in the title, description, highlights,
    schedule info, and the real enrollment link (the `cl-cta` button). Also
    update the `<title>` and the `og:*` / `twitter:*` meta tags at the top —
    those control how the page looks when someone shares the link on
    WhatsApp/Instagram/etc, so keep them in sync with the visible content.
+   If the page has a language switcher (`.cl-lang-switch`), update its two
+   links to point at the new page's own PT/EN URLs.
 3. Update `content/monthly-course.json`'s `ctaLink` (and `slug`) to point at
    the new page once that course is the one you want featured in the
    homepage banner.
@@ -50,8 +63,8 @@ the banner) — that keeps the social-preview tags always correct and each
 page easy to hand off/archive independently. Shared styling for all course
 pages lives in `assets/course-landing.css`.
 
-`cursos/novo-curso/` currently holds placeholder content and is the template
-to copy from.
+`apometria/` (with an `apometria/en/` English version alongside it) is the
+current live example and can be used as the template to copy from.
 
 ## Swapping images
 
