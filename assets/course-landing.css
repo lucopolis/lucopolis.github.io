@@ -240,8 +240,7 @@ img {
 }
 
 .cl-hero-title {
-  font-family: "Kapra Neue", system-ui, sans-serif;
-  text-transform: uppercase;
+  font-family: "Poynter OS Text", Georgia, serif;
   font-style: normal;
   font-size: clamp(2.5rem, 8vw, 4.5rem);
   line-height: 0.95;
@@ -298,8 +297,7 @@ img {
 }
 
 .cl-heading {
-  font-family: "Kapra Neue", system-ui, sans-serif;
-  text-transform: uppercase;
+  font-family: "Poynter OS Text", Georgia, serif;
   font-style: normal;
   font-size: clamp(1.4rem, 3.5vw, 1.8rem);
   color: var(--purple);

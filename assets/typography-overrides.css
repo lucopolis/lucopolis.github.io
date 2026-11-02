@@ -3,7 +3,10 @@
    Uses !important because these override Tailwind utility classes baked
    into the compiled bundle, which can't be edited directly. */
 
-/* 1. All headings (h1–h6 using the heading font): Kapra Neue, uppercase, never italic.
+/* 1. All headings (h1–h6 using the heading font): never italic.
+      (Was also forced uppercase here when the heading font was Kapra Neue;
+      now that headings use Poynter OS Text, sentence case reads better, so
+      the text-transform rule was removed — round 7.)
       Includes any nested accent <span class="italic"> inside a heading (e.g. the hero
       title's colored accent phrase), not just the heading element itself. */
 h1.font-serif,
@@ -12,7 +15,6 @@ h3.font-serif,
 h4.font-serif,
 h5.font-serif,
 h6.font-serif {
-  text-transform: uppercase;
   font-style: normal !important;
 }
 h1.font-serif *,

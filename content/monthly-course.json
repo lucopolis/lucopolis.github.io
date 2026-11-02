@@ -1,12 +1,12 @@
 {
   "enabled": true,
-  "image": "assets/banners/apometria.png",
-  "imageAlt": "Formação em Apometria — Inscrições abertas, vagas limitadas",
-  "ctaLink": "/apometria/",
-  "eyebrow": "Turma aberta",
-  "title": "Nome da turma / curso",
-  "description": "Escreva aqui uma frase curta sobre a turma que está com inscrições abertas neste mês.",
-  "ctaText": "Quero saber mais",
-  "note": "Vagas limitadas",
-  "slug": "apometria"
+  "image": "assets/banners/be-community-pt.jpg",
+  "imageAlt": "Participe da nossa comunidade do Be! Encontros semanais, às quintas-feiras, às 19h30, pelo Zoom.",
+  "ctaLink": "https://wa.link/vanessa_erani",
+  "eyebrow": "Comunidade Be",
+  "title": "Participe da nossa comunidade do Be!",
+  "description": "Encontros semanais, às quintas-feiras, às 19h30, pelo Zoom. Envio de Reiki aos participantes e estudos de livros com abordagem terapêutica e espiritualista.",
+  "ctaText": "Faça parte",
+  "note": "",
+  "slug": "comunidade-be"
 }

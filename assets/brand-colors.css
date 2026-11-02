@@ -273,3 +273,23 @@ span.text-honey:not(.font-serif) {
 footer div[class="flex flex-col items-start md:items-end gap-4"] > p {
   color: #000 !important;
 }
+
+/* ============================================================
+   Round 7 additions
+   ============================================================ */
+
+/* 24. Headline font trial: swap every heading (h1–h6 tagged .font-serif —
+       hero title, all section headings, bio headings, the item headings
+       inside Pra quem/Serviços/O método/Formações, etc.) from Kapra Neue
+       to Poynter OS Text. Overrides the compiled bundle's own
+       `.font-serif{font-family:"Kapra Neue"...}` rule, which can't be
+       edited directly. Text-transform (uppercase) from round 2 above is
+       left as-is for now — revisit if all-caps Poynter reads oddly. */
+h1.font-serif,
+h2.font-serif,
+h3.font-serif,
+h4.font-serif,
+h5.font-serif,
+h6.font-serif {
+  font-family: "Poynter OS Text", Georgia, serif !important;
+}

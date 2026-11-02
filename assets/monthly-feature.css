@@ -95,7 +95,7 @@
 }
 
 .bc-monthly-banner__title {
-  font-family: "Kapra Neue", system-ui, sans-serif;
+  font-family: "Poynter OS Text", Georgia, serif;
   font-size: clamp(1.15rem, 2.2vw, 1.5rem);
   line-height: 1.3;
   margin: 0 0 0.35rem 0;
