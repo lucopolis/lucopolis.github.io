@@ -40,13 +40,17 @@ a.rounded-full[class*="border-coral"] {
       - "Serviços" — the 4 boxes                (was text-xl/md:text-2xl → 1.25rem/1.5rem)
       - "O método" — the 4 numbered steps       (was flat text-2xl → 1.5rem)
       - "Formações" — the 3 boxes (Apometria/Reikiando/Reiki Mestrado) (was flat text-2xl → 1.5rem)
-   All four now share the same final size at both breakpoints (2.5rem / 3rem)
-   so they read as one consistent heading scale, per request. */
+   All four originally shared the same final size (2.5rem / 3rem) so they read
+   as one consistent heading scale.
+   Round 8: now that headings render in Poynter OS Text instead of Kapra Neue,
+   that size reads too big for three of the four groups, so those three are
+   reduced ~20% (2.5rem/3rem → 2rem/2.4rem) below. Formações is deliberately
+   NOT included — it wasn't mentioned in the round-8 request, so it keeps its
+   original size in its own rule further down. */
 h3.font-serif.text-xl.text-foreground:not(.tracking-tight),   /* Pra quem: 5 topics */
 h3.font-serif.text-xl.text-foreground.tracking-tight,          /* Serviços: 4 boxes */
-h3.font-serif.text-2xl.tracking-tight.mt-4,                    /* O método: 4 steps */
-h3.font-serif.text-2xl.text-foreground.tracking-tight {        /* Formações: 3 boxes */
-  font-size: 2.5rem !important;
+h3.font-serif.text-2xl.tracking-tight.mt-4 {                   /* O método: 4 steps */
+  font-size: 2rem !important;
   /* Relative line-height so it scales with the new size instead of keeping
      the original text-2xl/text-xl line-height (which was tuned for a much
      smaller font and caused wrapped lines to overlap). Also a bit more
@@ -57,7 +61,19 @@ h3.font-serif.text-2xl.text-foreground.tracking-tight {        /* Formações: 3
 @media (min-width: 768px) {
   h3.font-serif.text-xl.text-foreground:not(.tracking-tight),
   h3.font-serif.text-xl.text-foreground.tracking-tight,
-  h3.font-serif.text-2xl.tracking-tight.mt-4,
+  h3.font-serif.text-2xl.tracking-tight.mt-4 {
+    font-size: 2.4rem !important;
+  }
+}
+
+/* 3b. Formações (3 boxes): split out from rule 3 above so it keeps its
+       original, unreduced size (round 8). */
+h3.font-serif.text-2xl.text-foreground.tracking-tight {
+  font-size: 2.5rem !important;
+  line-height: 1.15 !important;
+  margin-top: 1.25rem !important;
+}
+@media (min-width: 768px) {
   h3.font-serif.text-2xl.text-foreground.tracking-tight {
     font-size: 3rem !important;
   }
@@ -68,9 +84,23 @@ p.font-serif.italic.text-base.text-ink.leading-snug {
   font-family: "Poynter OS Text", Georgia, serif !important;
 }
 
-/* 5. "Você sente que" bullet list: Poynter, not Kapra. */
+/* 5. "Você sente que" bullet list: Poynter, not Kapra.
+      Round 8: also reduced ~20% from the underlying Tailwind
+      text-2xl/md:text-3xl/lg:text-4xl scale (1.5/1.875/2.25rem →
+      1.2/1.5/1.8rem), same reasoning as rule 3 above. */
 li.font-serif.text-2xl.tracking-tight {
   font-family: "Poynter OS Text", Georgia, serif !important;
+  font-size: 1.2rem !important;
+}
+@media (min-width: 768px) {
+  li.font-serif.text-2xl.tracking-tight {
+    font-size: 1.5rem !important;
+  }
+}
+@media (min-width: 1024px) {
+  li.font-serif.text-2xl.tracking-tight {
+    font-size: 1.8rem !important;
+  }
 }
 
 /* 6. Vanessa & Jivago bio pull-quotes: Poynter, and 50% bigger
